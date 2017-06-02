@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import store from 'reduxFiles/store';
 import App from 'components/hello-world/App'
 import HomePage from 'components/hello-world/HomePage';
-import './index.css';
+import './index.scss';
 
 
 ReactDOM.render(
