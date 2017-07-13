@@ -9,7 +9,6 @@ var paths = require('./paths');
 var getClientEnvironment = require('./env');
 var path = require('path');
 
-
 function ensureSlash(path, needsSlash) {
   var hasSlash = path.endsWith('/');
   if (hasSlash && !needsSlash) {
@@ -79,21 +78,14 @@ module.exports = {
       reduxFiles: path.join(__dirname, '../src', 'redux-files'),
       config: path.join(__dirname, '../src', 'config'),
       helpers: path.join(__dirname, '../src', 'helpers'),
-     'react-native': 'react-native-web',
+      'react': path.resolve(__dirname, '../node_modules', 'react'),
+      //'react-native': 'react-native-web',
     },
     extensions: ['', '.js', '.jsx']
   },
   
   module: {
-    // First, run the linter.
-    // It's important to do this before Babel processes the JS.
-    preLoaders: [
-      {
-        test: /\.(js|jsx)$/,
-        loader: 'eslint',
-        include: paths.appSrc
-      }
-    ],
+    
     loaders: [
       // Default loader: load all assets that are not handled
       // by other loaders with the url loader.
@@ -114,8 +106,8 @@ module.exports = {
           /\.css$/,
           /\.json$/,
           /\.svg$/,
+          /\.scss$/,
           /\.sass$/,
-          /\.scss$/,  
         ],
         loader: 'url',
         query: {
@@ -147,11 +139,6 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style', 'css?importLoaders=1!postcss')
         // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
       },
-      {
-        test: /\.scss$/,
-        include: paths.appSrc,
-        loaders: ["style", "css", "sass"]
-      },
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.
       {
@@ -165,7 +152,12 @@ module.exports = {
         query: {
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      }
+      },
+      {
+        test: /\.scss$/,
+        include: paths.appSrc,
+        loaders: ["style", "css", "sass"]
+      },
     ]
   },
   
