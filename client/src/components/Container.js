@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import update from 'react/lib/update';
 import { DropTarget } from 'react-dnd';
+import shortid from 'shortid';
 
 import Card from './Card';
 import NewCardForm from './NewCardForm';
@@ -81,7 +82,7 @@ class Container extends Component {
 				{cards.map((card, i) => {
 					return (
 						<Card
-							key={card.id}
+							key={shortid.generate()}
 							index={i}
 							listId={this.props.id}
 							card={card}

@@ -37,7 +37,7 @@ cardRouter.post('/', (req, res) => {
   console.log(req.body)
   TestData
     .create({
-      testData: req.body.testData
+      cards: req.body.cards
     })
   .then(testObj => res.status(201).json(testObj))
   .catch(err => {
@@ -47,6 +47,7 @@ cardRouter.post('/', (req, res) => {
 });
 
 cardRouter.put('/:listId', (req, res) => {
+  console.log(req.body)
   const toUpdate = {
     cards: req.body.cards,
   }

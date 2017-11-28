@@ -5,7 +5,7 @@ const defaultState = {
   activeTaskId: null,
   cards: [],
   listId: null,
-  startTime: "12:00pm",
+  startTime: localStorage.startTime || "12:00pm",
 }
 
 export const listOne = (state = defaultState, action) => {
@@ -34,7 +34,7 @@ export const listOne = (state = defaultState, action) => {
       };
     }
     case actions.FETCH_CARDS_SUCCESS: {
-      const { cards, _id: listId } = action.payload[0];
+      const { cards, listId } = action.payload;
 
       return  {
         ...state,

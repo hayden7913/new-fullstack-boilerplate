@@ -1,10 +1,10 @@
 [
-  {"Duration": "10", "Task": "fetch bucket, coir, verm, scale, gallon jug"},
-  {"Duration": "10", "Task": "open/ break up coir"},
-  {"Duration": "5", "Task": "add water"},
-  {"Duration": "10", "Task": "prep pressure cookers/  timers"},
-  {"Duration": "30", "Task": "mix/adjust substrate "},
-  {"Duration": "10", "Task": "load bags"},
-  {"Duration": "10", "Task": "insert timers/ tie bags"},
-  {"Duration": "10", "Task": "start PC's / set timers"}
+  {"duration": "10", "Task": "fetch bucket, coir, verm, scale, gallon jug"},
+  {"duration": "10", "Task": "open/ break up coir"},
+  {"duration": "5", "Task": "add water"},
+  {"duration": "10", "Task": "prep pressure cookers/  timers"},
+  {"duration": "30", "Task": "mix/adjust substrate "},
+  {"duration": "10", "Task": "load bags"},
+  {"duration": "10", "Task": "insert timers/ tie bags"},
+  {"duration": "10", "Task": "start PC's / set timers"}
 ]

@@ -1,3 +1,5 @@
+import shortId from 'shortid';
+
 export const ADD_CARD = 'ADD_CARD';
 export const addCard = (newCard) => ({
   type: 'ADD_CARD',
@@ -29,7 +31,21 @@ export function fetchCards() {
       return res.json();
     })
     .then(data => {
-      dispatch(fetchCardsSuccess(data));
+      if (!data.length > 0) {
+        return null;
+      }
+
+      const cardsWithIds = data[0].cards.map(card => {
+        if (!card.id) {
+          return Object.assign(card, { id: shortId.generate() })
+        }
+
+        return card;
+      })
+      dispatch(fetchCardsSuccess({
+        listId: data[0]._id,
+        cards: cardsWithIds,
+      }));
     })
 
   }
@@ -39,10 +55,9 @@ export function saveCardState() {
   return (dispatch, getState) => {
     const { cards, listId } = getState().listOne;
 
-
     fetch(`/cards/${listId}`, {
         method: 'put',
-        body: JSON.stringify({ cards }),
+        body: JSON.stringify(cards),
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
@@ -79,7 +94,13 @@ export const updateCardDuration = (cardId, newDuration) => ({
 });
 
 export const UPDATE_START_TIME = 'UPDATE_START_TIME';
-export const updateStartTime = (newStartTime) => ({
-  type: 'UPDATE_START_TIME',
-  newStartTime,
-});
+export function updateStartTime(newStartTime) {
+  return (dispatch, getState) => {
+    localStorage.startTime = newStartTime;
+    console.log(localStorage.startTime);
+    return ({
+      type: 'UPDATE_START_TIME',
+      newStartTime,
+    });
+  }
+}

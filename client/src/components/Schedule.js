@@ -25,6 +25,10 @@ import Container from './Container';
 import EditInlineText from './EditInlineText';
 
 class Schedule extends Component {
+  static defaultProps = {
+    cards: []
+  }
+
   componentDidUpdate(prevProps) {
     const { activeTaskId, cards, setActiveTask, startTime } = this.props;
 

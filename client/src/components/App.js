@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import HTML5Backend from 'react-dnd-html5-backend';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Card } from 'material-ui/Card';
+import Clock from 'react-live-clock';
 
 import Schedule from './Schedule';
 
@@ -26,6 +27,10 @@ class App extends Component {
 		const { fetchCards } = this.props;
 
 		fetchCards();
+
+		if (!localStorage.startTime) {
+			localStorage.startTime = "12:00pm";
+		}
 	}
 
 	render() {
@@ -37,13 +42,29 @@ class App extends Component {
 			paddingTop: "10%",
 		}
 
+		const clockStyle = {
+			textAlign: "center",
+			padding: "10px",
+			paddingTop: "12px",
+			height:"50px",
+			display: "block",
+			width: "100px",
+			marginLeft: "20px",
+			fontSize: "20px",
+		};
 		return (
+
 	  <MuiThemeProvider>
-			<div style={{...style}}>
-				<Card>
-					<Container id={1} list={cards} {...this.props} />
-				</Card>
-					<Schedule />
+			<div>
+				<div style={{...style}}>
+					<Card>
+						<Container id={1} list={cards} {...this.props} />
+					</Card>
+						<Schedule />
+					<Card style={{ ...clockStyle }}>
+						<Clock format={'h:mm a'} ticking={true} timezone={'US/Pacific'} />
+					</Card>
+				</div>
 			</div>
 	  </MuiThemeProvider>
 		);
